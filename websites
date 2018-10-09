@@ -1,0 +1,31 @@
+docker run --name website \
+-v /home/lopan/trusty-ui-vue/dist:/usr/share/nginx/html:ro \
+-v /home/lopan/configs/prodnginx:/etc/nginx/conf.d \
+-v /home/lopan/configs/prodnginx.conf:/etc/nginx/nginx.conf \
+--network=webproxy \
+-e "VIRTUAL_HOST=trusty.fund" \
+-e "LETSENCRYPT_HOST=trusty.fund" \
+-e "LETSENCRYPT_EMAIL=root@trusty.fund" \
+--restart=always \
+-d nginx
+
+docker run --name tests \
+-v /home/lopan/trusty-test/dist:/usr/share/nginx/html:ro \
+-v /home/lopan/configs/prodnginx:/etc/nginx/conf.d \
+--network=webproxy \
+-e "VIRTUAL_HOST=app.trusty.fund" \
+-e "LETSENCRYPT_HOST=app.trusty.fund" \
+-e "LETSENCRYPT_EMAIL=root@trusty.fund" \
+--restart=always \
+-d nginx
+
+docker run --name bench \
+-v /home/lopan/bench-wallet-client/dist:/usr/share/nginx/html:ro \
+-v /home/lopan/configs/prodnginx:/etc/nginx/conf.d \
+--network=webproxy \
+-e "VIRTUAL_HOST=lab.trusty.fund" \
+-e "LETSENCRYPT_HOST=lab.trusty.fund" \
+-e "LETSENCRYPT_EMAIL=root@trusty.fund" \
+--restart=always \
+-d nginx
+

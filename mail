@@ -1,0 +1,9 @@
+docker run -d \
+    --name webmail \
+    --network=webproxy \
+    --restart=always \
+    -e "VIRTUAL_HOST=mail.trusty.fund" \
+    -e "LETSENCRYPT_HOST=mail.trusty.fund" \
+    -e "LETSENCRYPT_EMAIL=root@trusty.fund" \
+    library/nginx
+

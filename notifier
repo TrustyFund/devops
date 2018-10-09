@@ -1,0 +1,5 @@
+build -> 
+docker build -t notifier .
+
+run
+docker run -d --name notifier --restart=always notifier

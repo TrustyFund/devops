@@ -1,0 +1,12 @@
+build -> 
+docker build -t faucet .
+
+run
+docker run -d \
+    --name faucet \
+    --network=webproxy \
+    --restart=always \
+    -e "VIRTUAL_HOST=faucet.trusty.fund" \
+    -e "LETSENCRYPT_HOST=faucet.trusty.fund" \
+    -e "LETSENCRYPT_EMAIL=root@trusty.fund" \
+    faucet
